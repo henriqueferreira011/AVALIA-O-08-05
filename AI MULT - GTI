@@ -1,0 +1,208 @@
+import pandas as pd
+import numpy as np
+
+# Definindo o tamanho do dataset
+n_samples = 1000
+
+# Criando o DataFrame
+data = {
+    'Data': pd.date_range(start='2024-01-01', periods=n_samples),
+    'Vendas': np.random.randint(100, 1000, size=n_samples),
+    'Marketing': np.random.randint(50, 200, size=n_samples),
+    'Tempo': np.random.randint(20, 40, size=n_samples),
+    'Competidores': np.random.randint(1, 10, size=n_samples)
+}
+
+# Criando o DataFrame
+df = pd.DataFrame(data)
+
+# Salvando em um arquivo CSV
+df.to_csv('dataset_vendas.csv', index=False)
+
+# Etapa 2
+
+import matplotlib.pyplot as plt
+
+# Gráfico de vendas ao longo do tempo
+plt.figure(figsize=(10, 6))
+plt.plot(df['Data'], df['Vendas'])
+plt.title('Vendas ao Longo do Tempo')
+plt.xlabel('Data')
+plt.ylabel('Vendas')
+plt.grid(True)
+plt.show()
+
+# Etapa 3
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Dividindo o conjunto de dados em treino e teste
+X = df[['Marketing', 'Tempo', 'Competidores']]
+y = df['Vendas']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Criando e treinando o modelo de regressão linear
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Fazendo previsões no conjunto de teste
+y_pred = model.predict(X_test)
+
+# Avaliando o modelo
+mse = mean_squared_error(y_test, y_pred)
+print('Erro quadrático médio:', mse)
+
+# Etapa 4
+
+# Gráfico de dispersão entre Vendas e Gastos em Marketing
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Marketing'], df['Vendas'])
+plt.title('Vendas em função do Gasto em Marketing')
+plt.xlabel('Gasto em Marketing')
+plt.ylabel('Vendas')
+plt.grid(True)
+plt.show()
+
+# Histograma das Vendas
+plt.figure(figsize=(10, 6))
+plt.hist(df['Vendas'], bins=20, edgecolor='black')
+plt.title('Histograma de Vendas')
+plt.xlabel('Vendas')
+plt.ylabel('Frequência')
+plt.grid(True)
+plt.show()
+
+# Etapa 5
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Carregar o conjunto de dados
+df = pd.read_csv('/content/dataset_vendas.csv')  # Substitua 'caminho_para_o_seu_arquivo.csv' pelo caminho real do seu arquivo
+
+# Calcular média, mediana e desvio padrão para a coluna de Vendas
+media_vendas = df['Vendas'].mean()
+mediana_vendas = df['Vendas'].median()
+desvio_padrao_vendas = df['Vendas'].std()
+
+# Criar um gráfico de barras
+plt.figure(figsize=(10, 6))
+plt.bar(['Média', 'Mediana', 'Desvio Padrão'], [media_vendas, mediana_vendas, desvio_padrao_vendas], color=['blue', 'green', 'red'])
+plt.title('Estatísticas de Vendas')
+plt.xlabel('Estatística')
+plt.ylabel('Valor')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+
+# Etapa 6
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Carregar o conjunto de dados
+df = pd.read_csv('/content/dataset_vendas.csv')  # Substitua 'caminho_para_o_seu_arquivo.csv' pelo caminho real do seu arquivo
+
+# Escolher a variável independente e a variável dependente
+variavel_independente = 'Marketing'  # Substitua pelo nome da sua variável independente
+variavel_dependente = 'Vendas'       # Substitua pelo nome da sua variável dependente
+
+# Criar um gráfico de dispersão
+plt.figure(figsize=(10, 6))
+plt.scatter(df[variavel_independente], df[variavel_dependente], alpha=0.5)
+plt.title('Relação entre {} e {}'.format(variavel_independente, variavel_dependente))
+plt.xlabel(variavel_independente)
+plt.ylabel(variavel_dependente)
+plt.grid(True)
+plt.show()
+
+# Etapa 6
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Carregar o conjunto de dados
+df = pd.read_csv('/content/dataset_vendas.csv')  # Substitua 'caminho_para_o_seu_arquivo.csv' pelo caminho real do seu arquivo
+
+# Escolher a variável independente e a variável dependente
+variavel_independente = 'Marketing'  # Substitua pelo nome da sua variável independente
+variavel_dependente = 'Vendas'       # Substitua pelo nome da sua variável dependente
+
+# Dividir o conjunto de dados em treino e teste
+X = df[[variavel_independente]]
+y = df[variavel_dependente]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Criar e treinar o modelo de regressão linear
+modelo = LinearRegression()
+modelo.fit(X_train, y_train)
+
+# Fazer previsões no conjunto de teste
+y_pred = modelo.predict(X_test)
+
+# Avaliar o modelo
+mse = mean_squared_error(y_test, y_pred)
+print('Erro quadrático médio:', mse)
+
+#Etapa 7
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Carregar o conjunto de dados
+df = pd.read_csv('/content/dataset_vendas.csv')  # Substitua 'caminho_para_o_seu_arquivo.csv' pelo caminho real do seu arquivo
+
+# Escolher a variável independente e a variável dependente
+variavel_independente = 'Marketing'  # Substitua pelo nome da sua variável independente
+variavel_dependente = 'Vendas'       # Substitua pelo nome da sua variável dependente
+
+# Dividir o conjunto de dados em treino e teste
+X = df[[variavel_independente]]
+y = df[variavel_dependente]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Criar e treinar o modelo de regressão linear
+modelo = LinearRegression()
+modelo.fit(X_train, y_train)
+
+# Fazer previsões no conjunto de teste
+y_pred = modelo.predict(X_test)
+
+# Calcular o erro quadrático médio (MSE)
+mse = mean_squared_error(y_test, y_pred)
+
+# Calcular o coeficiente de determinação R²
+r2 = r2_score(y_test, y_pred)
+
+# Plotar os resultados da regressão
+plt.figure(figsize=(10, 6))
+plt.scatter(X_test, y_test, color='blue', label='Dados reais')
+plt.plot(X_test, y_pred, color='red', linewidth=2, label='Regressão Linear')
+plt.title('Regressão Linear: {} vs {}'.format(variavel_independente, variavel_dependente))
+plt.xlabel(variavel_independente)
+plt.ylabel(variavel_dependente)
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Plotar os resíduos
+residuos = y_test - y_pred
+plt.figure(figsize=(10, 6))
+plt.scatter(y_pred, residuos, color='green')
+plt.axhline(y=0, color='red', linestyle='--')
+plt.title('Resíduos da Regressão Linear')
+plt.xlabel('Previsões')
+plt.ylabel('Resíduos')
+plt.grid(True)
+plt.show()
+
+# Imprimir métricas de avaliação
+print('Erro Quadrático Médio (MSE):', mse)
+print('Coeficiente de Determinação R²:', r2)
